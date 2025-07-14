@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WHS Stationery List Generator</title>
+
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./scripts/logic.js"></script>
+
+  <style>
+    /* Hide everything by default unless JS enables it */
+    .js-required {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- This is shown ONLY when JS is disabled -->
+  <noscript>
+    <div style="padding: 2rem; font-size: 1.2rem;">
+      You need to enable JavaScript to run this app. <a href="https://www.browserstack.com/guide/how-to-enable-javascript-in-browser" target="_blank" rel="noopener noreferrer">How?</a>
+    </div>
+  </noscript>
+
+  <!-- JS-powered app interface (hidden by default) -->
+  <div class="js-required">
+    <h1>WHS Stationery List Generator</h1>
+
+    <label for="year">Select your year level:</label>
+    <select id="year">
+      <option value="">Choose Year level</option>
+      <option value="9">Year 9</option>
+      <option value="10">Year 10</option>
+    </select>
+
+    <div id="subjects-section" style="display:none;">
+      <label>Select your subjects:</label>
+      <div id="subjects"></div>
+      <button id="generate">Generate Stationery List</button>
+    </div>
+
+    <div id="result"></div>
+
+    <br><br>
+
+    <p>Written by <a href="https://owelton-rosie.pages.dev" target="_blank">Oscar Welton-Rosie</a>.</p>
+  </div>
+
+  <script>
+    // Show JS-enabled interface
+    document.querySelectorAll('.js-required').forEach(el => {
+      el.style.display = 'block';
+    });
+  </script>
+</body>
+</html>
