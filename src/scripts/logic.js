@@ -28,15 +28,41 @@ yearSelect.addEventListener("change", () => {
     .then(data => {
       stationeryData = data;
       const subjects = Object.keys(data);
+      const mustHave = ["English", "Mathematics", "Science", "Social Studies", "Māori", "Health and Physical Education"];
+      const preselect = ["9", "10", "11"].includes(year);
+
       subjects.forEach(subject => {
+        const isMandatory = preselect && mustHave.includes(subject);
+        const checkboxId = `subject-${subject.replace(/\s+/g, "-")}`;
+
         const div = document.createElement("div");
         div.className = "subject-checkbox";
         div.innerHTML = `
-          <input type="checkbox" id="${subject}" name="subject" value="${subject}">
-          <label for="${subject}">${subject}</label>
+          <input 
+            type="checkbox" 
+            id="${checkboxId}" 
+            name="subject" 
+            value="${subject}" 
+            ${isMandatory ? "checked disabled" : ""}
+          >
+          <label for="${checkboxId}">${subject}${isMandatory ? " (Required)" : ""}</label>
         `;
         subjectsDiv.appendChild(div);
       });
+
+      // Listener to enforce 6 subject max (excluding locked ones)
+      subjectsDiv.querySelectorAll('input[name="subject"]').forEach(checkbox => {
+        checkbox.addEventListener("change", () => {
+          const selected = subjectsDiv.querySelectorAll('input[name="subject"]:checked:not([disabled])');
+          if (selected.length > 6 - subjectsDiv.querySelectorAll('input[disabled]').length) {
+            checkbox.checked = false;
+            resultDiv.innerHTML = `<p style="color:red;">${ERRORS.tooManySubjects}</p>`;
+          } else {
+            resultDiv.innerHTML = "";
+          }
+        });
+      });
+
       subjectsSection.style.display = "block";
     })
     .catch(err => {
@@ -51,6 +77,11 @@ generateBtn.addEventListener("click", () => {
 
   if (selectedSubjects.length === 0) {
     resultDiv.innerHTML = `<p>${ERRORS.noSubjects}</p>`;
+    return;
+  }
+
+  if (selectedSubjects.length > 6) {
+    resultDiv.innerHTML = `<p style="color:red;">${ERRORS.tooManySubjects}</p>`;
     return;
   }
 
