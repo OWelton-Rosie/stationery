@@ -8,6 +8,7 @@ const generateBtn = document.getElementById("generate");
 const resultDiv = document.getElementById("result");
 
 let stationeryData = {};
+const foreignLanguages = ["Japanese", "Chinese", "Spanish"];
 
 yearSelect.addEventListener("change", () => {
   const year = yearSelect.value;
@@ -50,17 +51,37 @@ yearSelect.addEventListener("change", () => {
         subjectsDiv.appendChild(div);
       });
 
-      // Listener to enforce 6 subject max (excluding locked ones)
+      const mandatoryCount = subjectsDiv.querySelectorAll('input[disabled]').length;
+
       subjectsDiv.querySelectorAll('input[name="subject"]').forEach(checkbox => {
-        checkbox.addEventListener("change", () => {
-          const selected = subjectsDiv.querySelectorAll('input[name="subject"]:checked:not([disabled])');
-          if (selected.length > 6 - subjectsDiv.querySelectorAll('input[disabled]').length) {
-            checkbox.checked = false;
-            resultDiv.innerHTML = `<p style="color:red;">${ERRORS.tooManySubjects}</p>`;
-          } else {
+        if (!checkbox.disabled) {
+          checkbox.addEventListener("change", () => {
             resultDiv.innerHTML = "";
-          }
-        });
+
+            const selected = [...subjectsDiv.querySelectorAll('input[name="subject"]:checked:not([disabled])')];
+            const selectedValues = selected.map(cb => cb.value);
+            const selectedLanguages = selectedValues.filter(sub => foreignLanguages.includes(sub));
+
+            if (selectedLanguages.length > 1) {
+              checkbox.checked = false;
+              resultDiv.innerHTML = `<p style="color:red;">${ERRORS.tooManyLanguages}</p>`;
+              return;
+            }
+
+            if (year === "10") {
+              const maxSelectable = selectedLanguages.length === 1 ? 3 : 4;
+              if (selected.length > maxSelectable) {
+                checkbox.checked = false;
+                resultDiv.innerHTML = `<p style="color:red;">${ERRORS.tooManySubjectsYr10}</p>`;
+              }
+            } else {
+              if (selected.length > 6 - mandatoryCount) {
+                checkbox.checked = false;
+                resultDiv.innerHTML = `<p style="color:red;">${ERRORS.tooManySubjects}</p>`;
+              }
+            }
+          });
+        }
       });
 
       subjectsSection.style.display = "block";
@@ -75,22 +96,30 @@ generateBtn.addEventListener("click", () => {
   const selectedSubjects = [...document.querySelectorAll('input[name="subject"]:checked')]
     .map(cb => cb.value);
 
+  const selectedLanguages = selectedSubjects.filter(subject => foreignLanguages.includes(subject));
+
   if (selectedSubjects.length === 0) {
     resultDiv.innerHTML = `<p>${ERRORS.noSubjects}</p>`;
     return;
   }
 
-  if (selectedSubjects.length > 6) {
-    resultDiv.innerHTML = `<p style="color:red;">${ERRORS.tooManySubjects}</p>`;
-    return;
-  }
-
-  const foreignLanguages = ["Japanese", "Chinese", "Spanish"];
-  const selectedLanguages = selectedSubjects.filter(subject => foreignLanguages.includes(subject));
-
   if (selectedLanguages.length > 1) {
     resultDiv.innerHTML = `<p style="color:red;">${ERRORS.tooManyLanguages}</p>`;
     return;
+  }
+
+  if (yearSelect.value === "10") {
+    const optionalCount = selectedSubjects.length - 6;
+    const maxAllowed = selectedLanguages.length === 1 ? 3 : 4;
+    if (optionalCount > maxAllowed) {
+      resultDiv.innerHTML = `<p style="color:red;">${ERRORS.tooManySubjectsYr10}</p>`;
+      return;
+    }
+  } else {
+    if (selectedSubjects.length > 6) {
+      resultDiv.innerHTML = `<p style="color:red;">${ERRORS.tooManySubjects}</p>`;
+      return;
+    }
   }
 
   const items = new Set();
