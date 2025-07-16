@@ -29,7 +29,18 @@ yearSelect.addEventListener("change", () => {
     .then(data => {
       stationeryData = data;
       const subjects = Object.keys(data);
-      const mustHave = ["English", "Mathematics", "Science", "Social Studies", "Māori", "Health and Physical Education"];
+
+      // Define mandatory subjects per year
+      // Māori required only for Year 9, not for Year 10 or 11
+      let mustHave;
+      if (year === "9") {
+        mustHave = ["English", "Mathematics", "Science", "Social Studies", "Māori", "Health and Physical Education"];
+      } else if (year === "10" || year === "11") {
+        mustHave = ["English", "Mathematics", "Science", "Social Studies", "Health and Physical Education"];
+      } else {
+        mustHave = [];
+      }
+
       const preselect = ["9", "10", "11"].includes(year);
 
       subjects.forEach(subject => {
@@ -109,9 +120,8 @@ generateBtn.addEventListener("click", () => {
   }
 
   if (yearSelect.value === "10") {
-    const optionalCount = selectedSubjects.length - 6;
     const maxAllowed = selectedLanguages.length === 1 ? 3 : 4;
-    if (optionalCount > maxAllowed) {
+    if (selectedSubjects.length > maxAllowed) {
       resultDiv.innerHTML = `<p style="color:red;">${ERRORS.tooManySubjectsYr10}</p>`;
       return;
     }
