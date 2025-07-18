@@ -35,10 +35,14 @@ yearSelect.addEventListener("change", () => {
       let mustHave;
       if (year === "9") {
         mustHave = ["English", "Mathematics", "Science", "Social Studies", "Māori", "Health and Physical Education"];
-      } else if (year === "10" || year === "11") {
+      } else if (year === "10") {
         mustHave = ["English", "Mathematics", "Science", "Social Studies", "Health and Physical Education"];
-      } else {
-        mustHave = [];
+      } else if (year === "11") {
+        mustHave = ["English", "Mathematics",];
+      } else if (year === "12") {
+        mustHave = ["English",];
+      }
+        else if (year === "13") {
       }
 
       const preselect = ["9", "10", "11"].includes(year);
