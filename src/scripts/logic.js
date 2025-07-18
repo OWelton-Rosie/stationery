@@ -31,18 +31,17 @@ yearSelect.addEventListener("change", () => {
       const subjects = Object.keys(data);
 
       // Define mandatory subjects per year
-      // Māori required only for Year 9, not for Year 10 or 11
       let mustHave;
       if (year === "9") {
-        mustHave = ["English", "Mathematics", "Science", "Social Studies", "Māori", "Health and Physical Education"];
+        mustHave = ["English", "Mathematics", "Science", "Social Studies", "Te Ao Māori", "Health and Physical Education"];
       } else if (year === "10") {
         mustHave = ["English", "Mathematics", "Science", "Social Studies", "Health and Physical Education"];
       } else if (year === "11") {
-        mustHave = ["English", "Mathematics",];
+        mustHave = ["English", "Mathematics"];
       } else if (year === "12") {
-        mustHave = ["English",];
-      }
-        else if (year === "13") {
+        mustHave = ["English"];
+      } else if (year === "13") {
+        mustHave = [];
       }
 
       const preselect = ["9", "10", "11"].includes(year);
@@ -82,7 +81,7 @@ yearSelect.addEventListener("change", () => {
               resultDiv.innerHTML = `<p style="color:red;">${ERRORS.tooManyLanguages}</p>`;
               return;
             }
-
+            
             if (year === "10") {
               const maxSelectable = selectedLanguages.length === 1 ? 3 : 4;
               if (selected.length > maxSelectable) {
@@ -90,7 +89,7 @@ yearSelect.addEventListener("change", () => {
                 resultDiv.innerHTML = `<p style="color:red;">${ERRORS.tooManySubjectsYr10}</p>`;
               }
             } else {
-              if (selected.length > 6 - mandatoryCount) {
+              if (selected.length > 9 - mandatoryCount) {
                 checkbox.checked = false;
                 resultDiv.innerHTML = `<p style="color:red;">${ERRORS.tooManySubjects}</p>`;
               }
@@ -130,7 +129,8 @@ generateBtn.addEventListener("click", () => {
       return;
     }
   } else {
-    if (selectedSubjects.length > 6) {
+    const mandatoryCount = document.querySelectorAll('input[name="subject"][disabled]').length;
+    if (selectedSubjects.length > 9) {
       resultDiv.innerHTML = `<p style="color:red;">${ERRORS.tooManySubjects}</p>`;
       return;
     }
