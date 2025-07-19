@@ -30,7 +30,6 @@ yearSelect.addEventListener("change", () => {
       stationeryData = data;
       const subjects = Object.keys(data);
 
-      // Define mandatory subjects per year
       let mustHave;
       if (year === "9") {
         mustHave = ["English", "Mathematics", "Science", "Social Studies", "Te Ao Māori", "Health and Physical Education"];
@@ -81,7 +80,7 @@ yearSelect.addEventListener("change", () => {
               resultDiv.innerHTML = `<p style="color:red;">${ERRORS.tooManyLanguages}</p>`;
               return;
             }
-            
+
             if (year === "10") {
               const maxSelectable = selectedLanguages.length === 1 ? 3 : 4;
               if (selected.length > maxSelectable) {
@@ -107,6 +106,7 @@ yearSelect.addEventListener("change", () => {
 });
 
 generateBtn.addEventListener("click", () => {
+  const year = yearSelect.value;
   const selectedSubjects = [...document.querySelectorAll('input[name="subject"]:checked')]
     .map(cb => cb.value);
 
@@ -122,28 +122,37 @@ generateBtn.addEventListener("click", () => {
     return;
   }
 
-  if (yearSelect.value === "10") {
+  if (year === "10") {
     const maxAllowed = selectedLanguages.length === 1 ? 3 : 4;
-    if (selectedSubjects.length > maxAllowed) {
+    const electiveCount = selectedSubjects.length - document.querySelectorAll('input[name="subject"][disabled]').length;
+    if (electiveCount > maxAllowed) {
       resultDiv.innerHTML = `<p style="color:red;">${ERRORS.tooManySubjectsYr10}</p>`;
       return;
     }
   } else {
     const mandatoryCount = document.querySelectorAll('input[name="subject"][disabled]').length;
-    if (selectedSubjects.length > 9) {
+    const electiveCount = selectedSubjects.length - mandatoryCount;
+    if (electiveCount > (9 - mandatoryCount)) {
       resultDiv.innerHTML = `<p style="color:red;">${ERRORS.tooManySubjects}</p>`;
       return;
     }
   }
 
-  const items = new Set();
+  // Cumulative stationery list
+  const itemCounts = {};
   selectedSubjects.forEach(subject => {
-    stationeryData[subject]?.forEach(item => items.add(item));
+    stationeryData[subject]?.forEach(item => {
+      itemCounts[item] = (itemCounts[item] || 0) + 1;
+    });
   });
 
-  const itemList = [...items];
-  const listHTML = itemList.map(i => `<li>${i}</li>`).join("");
-  const listText = itemList.map(i => `- ${i}`).join("\n");
+  const itemList = Object.entries(itemCounts);
+  const listHTML = itemList.map(([item, count]) =>
+    `<li>${item}${count > 1 ? ` x${count}` : ""}</li>`
+  ).join("");
+  const listText = itemList.map(([item, count]) =>
+    `- ${item}${count > 1 ? ` x${count}` : ""}`
+  ).join("\n");
 
   resultDiv.innerHTML = `
     <h2>Stationery List</h2>
