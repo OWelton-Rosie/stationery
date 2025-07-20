@@ -12,6 +12,7 @@ This guide is split into the following parts:
 
 ## Getting started
 Prerequisites:
+- Python 
 
 Clone the repository:
 ```
@@ -27,4 +28,10 @@ To open `index.html` on [http://localhost:4000/src](http://localhost:4000/src/),
 ```
 python3 -m http.server 4000
 ```
+
+Note that this guide assumes you're using Python 3. If you're using Python 2, run this command instead:
+```
+python -m SimpleHTTPServer 4000 
+```
+This will open `index.html` on [http://localhost:4000/src](http://localhost:4000/src/).
 
