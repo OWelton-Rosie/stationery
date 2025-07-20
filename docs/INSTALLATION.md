@@ -6,7 +6,7 @@
 ## Table of contents
 This guide is split into the following parts:
 
-- [Getting started]((https://github.com/OWelton-Rosie/stationery/blob/main/docs/INSTALLATION.md#getting-started)) (cloning, obtaining the necessary dependancies, etc)
+- [Getting started]((https://github.com/OWelton-Rosie/stationery/blob/main/docs/INSTALLATION.md#getting-started) (cloning, obtaining the necessary dependancies, etc)
 - [Basic logic configuration](https://github.com/OWelton-Rosie/stationery/blob/main/docs/INSTALLATION.md#basic-logic-configuration) (setting up required subjects
 - [JSON creation/editing](https://github.com/OWelton-Rosie/stationery/blob/main/docs/INSTALLATION.md#json-creationediting) (to define your list of subjects for each year level)
 
