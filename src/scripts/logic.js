@@ -43,7 +43,7 @@ yearSelect.addEventListener("change", () => {
         mustHave = [];
       }
 
-      const preselect = ["9", "10", "11"].includes(year);
+      const preselect = ["9", "10", "11", "12", "13"].includes(year);
 
       subjects.forEach(subject => {
         const isMandatory = preselect && mustHave.includes(subject);
