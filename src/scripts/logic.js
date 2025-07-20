@@ -113,7 +113,7 @@ generateBtn.addEventListener("click", () => {
   const selectedLanguages = selectedSubjects.filter(subject => foreignLanguages.includes(subject));
 
   if (selectedSubjects.length === 0) {
-    resultDiv.innerHTML = `<p>${ERRORS.noSubjects}</p>`;
+    resultDiv.innerHTML = `<p style="color:red;">${ERRORS.noSubjects}</p>`;
     return;
   }
 
