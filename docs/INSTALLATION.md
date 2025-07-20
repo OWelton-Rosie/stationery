@@ -35,3 +35,8 @@ python -m SimpleHTTPServer 4000
 ```
 This will open `index.html` on [http://localhost:4000/src](http://localhost:4000/src/).
 
+### Now that you've got the server running locally, it's time to develop!
+
+## Basic logic configuration
+## JSON creation/editing
+
