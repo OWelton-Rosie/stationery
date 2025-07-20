@@ -1,5 +1,5 @@
 ## Directory breakdown
 
-- `.github` contains files such as the CODEOWNERS and ISSUE_TEMPLATE files
-- `docs` contains documentation to help you install the program
+- `.github`  contains GitHub-specific files such as `CODEOWNERS`, `ISSUE_TEMPLATE`, `README.md`, and various policies (security, code of conduct, etc)
+-  `docs` contains documentation to help you install and run the program
 - `src` contains the actual code
