@@ -12,7 +12,7 @@ This guide is split into the following parts:
 
 ## Getting started
 Prerequisites:
-- Python 
+- Python (to open `index.html`, as most browsers block the `fetch()` function on local files)
 
 Clone the repository:
 ```
@@ -35,7 +35,7 @@ python -m SimpleHTTPServer 4000
 ```
 This will open `index.html` on [http://localhost:4000/src](http://localhost:4000/src/).
 
-### Now that you've got the server running locally, it's time to develop!
+### Now that you've got the project running locally, it's time to develop!
 
 ## Basic logic configuration
 ## JSON creation/editing
