@@ -1,6 +1,8 @@
 import { ERRORS } from './errors.js';
 import { copyToClipboard } from './clipboard.js';
 import { categorizeStationery, buildCategorizedListOutput } from './categorisation.js';
+import { getMustHaveSubjects } from './mustHave.js';
+
 
 const yearSelect = document.getElementById("year");
 const subjectsDiv = document.getElementById("subjects");
@@ -31,18 +33,8 @@ yearSelect.addEventListener("change", () => {
       stationeryData = data;
       const subjects = Object.keys(data);
 
-      let mustHave;
-      if (year === "9") {
-        mustHave = ["English", "Mathematics", "Science", "Social Studies", "Te Ao Māori", "Health and Physical Education"];
-      } else if (year === "10") {
-        mustHave = ["English", "Mathematics", "Science", "Social Studies", "Health and Physical Education"];
-      } else if (year === "11") {
-        mustHave = ["English", "Mathematics"];
-      } else if (year === "12") {
-        mustHave = ["English"];
-      } else if (year === "13") {
-        mustHave = [];
-      }
+      const mustHave = getMustHaveSubjects(year);
+
 
       const preselect = ["9", "10", "11", "12", "13"].includes(year);
 
