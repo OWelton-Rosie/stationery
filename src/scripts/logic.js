@@ -1,5 +1,6 @@
 import { ERRORS } from './errors.js';
 import { copyToClipboard } from './clipboard.js';
+import { categorizeStationery, buildCategorizedListOutput } from './categorisation.js';
 
 const yearSelect = document.getElementById("year");
 const subjectsDiv = document.getElementById("subjects");
@@ -138,30 +139,21 @@ generateBtn.addEventListener("click", () => {
     }
   }
 
-  // Cumulative stationery list
-  const itemCounts = {};
-  selectedSubjects.forEach(subject => {
-    stationeryData[subject]?.forEach(item => {
-      itemCounts[item] = (itemCounts[item] || 0) + 1;
-    });
-  });
-
-  const itemList = Object.entries(itemCounts);
-  const listHTML = itemList.map(([item, count]) =>
-    `<li>${item}${count > 1 ? ` x${count}` : ""}</li>`
-  ).join("");
-  const listText = itemList.map(([item, count]) =>
-    `- ${item}${count > 1 ? ` x${count}` : ""}`
-  ).join("\n");
+  // Categorize and build output
+  const categorizedItems = categorizeStationery(selectedSubjects, stationeryData);
+  const { html: listHTML, text: listText } = buildCategorizedListOutput(categorizedItems);
 
   resultDiv.innerHTML = `
     <h2>Stationery List</h2>
-    <ul>${listHTML}</ul>
+    ${listHTML}
     <button id="copy-btn">Copy List</button>
     <p id="copy-status" style="color: black; display: none;">Copied to clipboard!</p>
   `;
 
   document.getElementById("copy-btn").addEventListener("click", () => {
     copyToClipboard(listText);
+    const status = document.getElementById("copy-status");
+    status.style.display = "block";
+    setTimeout(() => status.style.display = "none", 2000);
   });
 });
