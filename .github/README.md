@@ -1,6 +1,6 @@
 <img src="https://github.com/OWelton-Rosie/stationery/blob/main/src/assets/WHS_logo_SMALL.png">
 
-# WHS stationery list
+# WHS stationery list generator
 
 ## Directory breakdown
 
