@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WHS Stationery List Generator</title>
+
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./scripts/logic.js"></script>
+
+  <style>
+    /* Hide everything by default unless JS enables it */
+    .js-required {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- This is shown ONLY when JS is disabled -->
+  <noscript>
+    <div style="padding: 2rem; font-size: 1.2rem;">
+      You need to enable JavaScript to run this app. <a href="https://www.browserstack.com/guide/how-to-enable-javascript-in-browser" target="_blank" rel="noopener noreferrer">How?</a>
+    </div>
+  </noscript>
+
+  <!-- JS-powered app interface (hidden by default) -->
+  <div class="js-required">
+
+    <p><a href="./index.html">Back to the homepage</a></p>
+
+    <h1>About this app</h1>
+    <p>This app exists a convenience tool for WHS students, parents and teachers. After my family and I struggled with the WHS stationery list, I decided to create an app that would help others in my position.</p>
+
+    <p>This app is not affiliated with Wellington High School. It exists a convenience tool. If you're interested in using this app for your school or club, please <a href="https://owelton-rosie.pages.dev/contact" target="_blank">contact me</a>.</p>
+
+    <p>If you are a developer and are interested in viewing the source code of this app, you can find the source code on <a href="https://github.com/OWelton-Rosie/stationery" target="_blank>">GitHub</a></p>
+
+  </div>
+
+  <script>
+    // Show JS-enabled interface
+    document.querySelectorAll('.js-required').forEach(el => {
+      el.style.display = 'block';
+    });
+  </script>
+</body>
+</html>
