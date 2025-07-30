@@ -20,7 +20,6 @@ const itemCategories = {
     "Whiteboard marker x4": "Writing Tools",
     "Water bottle": "Miscellaneous",
     "Pencil": "Writing Tools"
-    // Add any missing items here
   };
   
   /**
