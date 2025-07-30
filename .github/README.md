@@ -1,4 +1,5 @@
-<img src="https://github.com/OWelton-Rosie/stationery/blob/main/src/assets/WHS_logo.png">
+<img src="https://github.com/OWelton-Rosie/stationery/blob/main/src/assets/WHS_logo.png" style="width:500px;height:600px";>
+
 # WHS stationery list
 
 ## Directory breakdown
