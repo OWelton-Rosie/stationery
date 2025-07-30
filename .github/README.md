@@ -1,4 +1,4 @@
-<img src="https://github.com/OWelton-Rosie/stationery/blob/main/src/assets/WHS_logo.png">
+<img src="https://github.com/OWelton-Rosie/stationery/blob/main/src/assets/WHS_logo_SMALL.png">
 
 # WHS stationery list
 
