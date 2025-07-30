@@ -6,3 +6,4 @@
 
 # Todo
 - Have the categorisation text be inside the grey staionery list background
+- Make copied to clipboard message nicer
