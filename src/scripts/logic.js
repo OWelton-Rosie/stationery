@@ -136,11 +136,15 @@ generateBtn.addEventListener("click", () => {
   const { html: listHTML, text: listText } = buildCategorizedListOutput(categorizedItems);
 
   resultDiv.innerHTML = `
+  <div class="stationery-list-container">
     <h2>Stationery List</h2>
     ${listHTML}
-    <button id="copy-btn">Copy List</button>
     <p id="copy-status" style="color: black; display: none;">Copied to clipboard!</p>
-  `;
+  </div>
+      <button id="copy-btn">Copy List</button>
+
+`;
+
 
   document.getElementById("copy-btn").addEventListener("click", () => {
     copyToClipboard(listText);
