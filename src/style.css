@@ -1,79 +1,91 @@
 body {
-  font-family: sans-serif;
-  padding: 2rem;
-  max-width: 700px;
-  margin: auto;
-  background-color: #fff;
-  color: #333;
-}
+    font-family: sans-serif;
+    padding: 2rem;
+    max-width: 700px;
+    margin: auto;
+    background-color: #fff;
+    color: #333;
+  }
+  
+  select, button, input[type="checkbox"] {
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    font-size: 1rem;
+  }
+  
+  .subject-checkbox {
+    margin: 0.5rem 0;
+  }
+  
+  #year {
+    display: block;
+    width: 90%;
+    max-width: 400px;
+    padding: 0.4rem 0.75rem;
+    font-size: 1rem;
+    margin: 0.5rem 0 1rem 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #fff;
+    box-sizing: border-box;
+    appearance: none;
+  }
+  
+  ul {
+    background: #f4f4f4;
+    padding: 1rem;
+    border-radius: 6px;
+  }
+  .stationery-list-container {
+    background-color: #f4f4f4; /* same as ul background for consistency */
+    padding: 1.25rem;
+    border-radius: 6px;
+    margin-top: 1rem;
+  }
+  
 
-select, button, input[type="checkbox"] {
-  padding: 0.5rem;
-  margin: 0.5rem 0;
-  font-size: 1rem;
-}
-
-.subject-checkbox {
-  margin: 0.5rem 0;
-}
-
-#year {
-  display: block;
-  width: 90%;
-  max-width: 400px;
-  padding: 0.4rem 0.75rem;
-  font-size: 1rem;
-  margin: 0.5rem 0 1rem 0;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  background-color: #fff;
-  box-sizing: border-box;
-  appearance: none;
-}
-
-ul {
-  background: #f4f4f4;
-  padding: 1rem;
-  border-radius: 6px;
-}
-
-#copy-btn {
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  font-weight: bold;
-  background: #007acc;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-#copy-btn:hover {
-  background: #005da3;
-}
-
-a, a:visited {
-  color: #007acc;
-  text-decoration: none;
-}
-
-a:hover, a:visited:hover {
-  text-decoration: underline;
-  color: #025185;
-}
-
-#generate {
-  background-color: #007acc;
-  color: white;
-  font-size: 1rem;
-  font-weight: bold;
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  margin-top: 1rem;
-}
-
-#generate:hover {
-  background-color: #025185;
-}
+  .license-summary {
+    background-color: white;
+    font-size: 1rem;
+  }
+  
+  #copy-btn {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    background: #007acc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #copy-btn:hover {
+    background: #005da3;
+  }
+  
+  a, a:visited {
+    color: #007acc;
+    text-decoration: none;
+  }
+  
+  a:hover, a:visited:hover {
+    text-decoration: underline;
+    color: #025185;
+  }
+  
+  #generate {
+    background-color: #007acc;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    margin-top: 1rem;
+  }
+  
+  #generate:hover {
+    background-color: #025185;
+  }
