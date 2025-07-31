@@ -1,3 +1,4 @@
+// Imports
 import { ERRORS } from './errors.js';
 import { copyToClipboard } from './clipboard.js';
 import { categorizeStationery, buildCategorizedListOutput } from './categorisation.js';
@@ -11,41 +12,43 @@ const generateBtn = document.getElementById("generate");
 const resultDiv = document.getElementById("result");
 
 // Constants
-const foreignLanguages = new Set(["Japanese", "Chinese", "Spanish"]);
+const FOREIGN_LANGUAGES = new Set(["Japanese", "Chinese", "Spanish"]);
 let stationeryData = {};
 
-// Utility Functions
+/**
+ * Creates a checkbox element with label for a subject.
+ * @param {string} subject
+ * @param {boolean} isMandatory
+ * @returns {HTMLElement}
+ */
 function createSubjectCheckbox(subject, isMandatory) {
   const checkboxId = `subject-${subject.replace(/\s+/g, "-")}`;
 
   const wrapper = document.createElement("div");
   wrapper.className = "subject-checkbox";
 
-  const checkbox = document.createElement("input");
-  checkbox.type = "checkbox";
-  checkbox.id = checkboxId;
-  checkbox.name = "subject";
-  checkbox.value = subject;
-  if (isMandatory) {
-    checkbox.checked = true;
-    checkbox.disabled = true;
-  }
+  const checkbox = Object.assign(document.createElement("input"), {
+    type: "checkbox",
+    id: checkboxId,
+    name: "subject",
+    value: subject,
+    checked: isMandatory,
+    disabled: isMandatory,
+  });
 
-  const label = document.createElement("label");
-  label.htmlFor = checkboxId;
+  const label = Object.assign(document.createElement("label"), {
+    htmlFor: checkboxId,
+    textContent: `${subject}${isMandatory ? " (Required)" : ""}`,
+  });
 
-  const space = document.createTextNode(" ");
-  const labelText = document.createTextNode(subject + (isMandatory ? " (Required)" : ""));
-
-  label.appendChild(space);
-  label.appendChild(labelText);
-
-  wrapper.appendChild(checkbox);
-  wrapper.appendChild(label);
-
+  wrapper.append(checkbox, label);
   return wrapper;
 }
 
+/**
+ * Displays an error message in the resultDiv.
+ * @param {string} message
+ */
 function displayError(message) {
   resultDiv.innerHTML = "";
   const error = document.createElement("p");
@@ -54,11 +57,19 @@ function displayError(message) {
   resultDiv.appendChild(error);
 }
 
+/**
+ * Clears subjects list and result content.
+ */
 function clearSubjectsAndResult() {
   subjectsDiv.innerHTML = "";
   resultDiv.innerHTML = "";
 }
 
+/**
+ * Enforces selection rules for subjects based on year and mandatory count.
+ * @param {string} year
+ * @param {number} mandatoryCount
+ */
 function enforceSelectionRules(year, mandatoryCount) {
   const checkboxes = subjectsDiv.querySelectorAll('input[name="subject"]');
 
@@ -69,23 +80,27 @@ function enforceSelectionRules(year, mandatoryCount) {
       resultDiv.innerHTML = "";
 
       const selected = [...checkboxes].filter(cb => cb.checked && !cb.disabled);
-      const selectedValues = selected.map(cb => cb.value);
-      const selectedLanguages = selectedValues.filter(sub => foreignLanguages.has(sub));
-
-      if (selectedLanguages.length > 1) {
-        checkbox.checked = false;
-        displayError(ERRORS.tooManyLanguages);
-        return;
-      }
+      const selectedSubjects = selected.map(cb => cb.value);
+      const selectedLanguages = selectedSubjects.filter(subject => FOREIGN_LANGUAGES.has(subject));
+      const electiveCount = selectedSubjects.length;
 
       if (year === "10") {
-        const maxSelectable = selectedLanguages.length === 1 ? 3 : 4;
-        if (selected.length > maxSelectable) {
+        const valid =
+          (selectedLanguages.length === 1 && electiveCount === 3) ||
+          (selectedLanguages.length === 0 && electiveCount === 4);
+
+        if (!valid || selectedLanguages.length > 1) {
           checkbox.checked = false;
           displayError(ERRORS.tooManySubjectsYr10);
         }
       } else {
-        if (selected.length > (9 - mandatoryCount)) {
+        if (selectedLanguages.length > 1) {
+          checkbox.checked = false;
+          displayError(ERRORS.tooManyLanguages);
+          return;
+        }
+
+        if (electiveCount > (9 - mandatoryCount)) {
           checkbox.checked = false;
           displayError(ERRORS.tooManySubjects);
         }
@@ -94,6 +109,9 @@ function enforceSelectionRules(year, mandatoryCount) {
   });
 }
 
+/**
+ * Handles year selection changes.
+ */
 function handleYearChange() {
   const year = yearSelect.value;
   clearSubjectsAndResult();
@@ -111,17 +129,17 @@ function handleYearChange() {
     .then(data => {
       stationeryData = data;
       const subjects = Object.keys(data);
-      const mustHave = getMustHaveSubjects(year);
+      const mustHaveSubjects = getMustHaveSubjects(year);
       const isSenior = ["9", "10", "11", "12", "13"].includes(year);
 
       subjects.forEach(subject => {
-        const isMandatory = isSenior && mustHave.includes(subject);
-        const checkbox = createSubjectCheckbox(subject, isMandatory);
-        subjectsDiv.appendChild(checkbox);
+        const isMandatory = isSenior && mustHaveSubjects.includes(subject);
+        subjectsDiv.appendChild(createSubjectCheckbox(subject, isMandatory));
       });
 
       const mandatoryCount = subjectsDiv.querySelectorAll('input[disabled]').length;
       enforceSelectionRules(year, mandatoryCount);
+
       subjectsSection.style.display = "block";
     })
     .catch(err => {
@@ -130,9 +148,15 @@ function handleYearChange() {
     });
 }
 
+/**
+ * Renders stationery list HTML and a separate copy button outside the list container.
+ * @param {string} html - The HTML string of the stationery list.
+ * @param {string} text - The plain text of the stationery list for copying.
+ */
 function renderResultList(html, text) {
   resultDiv.innerHTML = "";
 
+  // Stationery list container (with grey background styling presumably)
   const container = document.createElement("div");
   container.className = "stationery-list-container";
 
@@ -142,43 +166,51 @@ function renderResultList(html, text) {
   const content = document.createElement("div");
   content.innerHTML = html;
 
-  // Wrapper for button and copied status, laid out horizontally
+  container.append(heading, content);
+
+  // Copy button and status outside the container
   const copyWrapper = document.createElement("div");
   copyWrapper.style.display = "flex";
   copyWrapper.style.alignItems = "center";
   copyWrapper.style.gap = "1rem";
   copyWrapper.style.marginTop = "1rem";
 
-  const copyBtn = document.createElement("button");
-  copyBtn.id = "copy-btn";
-  copyBtn.textContent = "Copy List";
+  const copyBtn = Object.assign(document.createElement("button"), {
+    id: "copy-btn",
+    textContent: "Copy List",
+  });
 
-  const status = document.createElement("span");
-  status.id = "copy-status";
-  status.style.color = "black";
-  status.style.display = "none";
-  status.textContent = "Copied to clipboard!";
+  const status = Object.assign(document.createElement("span"), {
+    id: "copy-status",
+    style: "color: black; display: none;",
+    textContent: "Copied to clipboard!",
+  });
   status.setAttribute("role", "status");
   status.setAttribute("aria-live", "polite");
 
   copyBtn.addEventListener("click", () => {
     copyToClipboard(text);
     status.style.display = "inline";
-    setTimeout(() => (status.style.display = "none"), 2000);
+    setTimeout(() => {
+      status.style.display = "none";
+    }, 2000);
   });
 
-  copyWrapper.appendChild(copyBtn);
-  copyWrapper.appendChild(status);
+  copyWrapper.append(copyBtn, status);
 
-  container.append(heading, content, copyWrapper);
-  resultDiv.appendChild(container);
+  // Append both as siblings
+  resultDiv.append(container, copyWrapper);
 }
 
+/**
+ * Handles the "Generate" button click event.
+ */
 function handleGenerateClick() {
   const year = yearSelect.value;
-  const selectedSubjects = [...document.querySelectorAll('input[name="subject"]:checked')].map(cb => cb.value);
+  const selected = [...document.querySelectorAll('input[name="subject"]:checked')];
+  const selectedSubjects = selected.map(cb => cb.value);
 
-  const selectedLanguages = selectedSubjects.filter(sub => foreignLanguages.has(sub));
+  const selectedLanguages = selectedSubjects.filter(subject => FOREIGN_LANGUAGES.has(subject));
   const mandatoryCount = document.querySelectorAll('input[name="subject"][disabled]').length;
   const electiveCount = selectedSubjects.length - mandatoryCount;
 
@@ -187,29 +219,32 @@ function handleGenerateClick() {
     return;
   }
 
-  if (selectedLanguages.length > 1) {
-    displayError(ERRORS.tooManyLanguages);
-    return;
-  }
-
   if (year === "10") {
-    const maxAllowed = selectedLanguages.length === 1 ? 3 : 4;
-    if (electiveCount > maxAllowed) {
+    const valid =
+      (selectedLanguages.length === 1 && electiveCount === 3) ||
+      (selectedLanguages.length === 0 && electiveCount === 4);
+
+    if (!valid || selectedLanguages.length > 1) {
       displayError(ERRORS.tooManySubjectsYr10);
       return;
     }
   } else {
-    if (electiveCount > 9 - mandatoryCount) {
+    if (selectedLanguages.length > 1) {
+      displayError(ERRORS.tooManyLanguages);
+      return;
+    }
+
+    if (electiveCount > (9 - mandatoryCount)) {
       displayError(ERRORS.tooManySubjects);
       return;
     }
   }
 
-  const categorizedItems = categorizeStationery(selectedSubjects, stationeryData);
-  const { html: listHTML, text: listText } = buildCategorizedListOutput(categorizedItems);
-  renderResultList(listHTML, listText);
+  const categorized = categorizeStationery(selectedSubjects, stationeryData);
+  const { html, text } = buildCategorizedListOutput(categorized);
+  renderResultList(html, text);
 }
 
-// Event Listeners
+// Attach event listeners
 yearSelect.addEventListener("change", handleYearChange);
 generateBtn.addEventListener("click", handleGenerateClick);
