@@ -1,5 +1,9 @@
-// Categorization mapping for each stationery item
-const ITEM_CATEGORIES = {
+/**
+ * Mapping of stationery items to their categories.
+ * This object and its contents are immutable.
+ * @readonly
+ */
+const ITEM_CATEGORIES = Object.freeze({
   "1J5 Quad exercise book x2": "Paper Products",
   "2B8 exercise book": "Paper Products",
   "1B8 exercise book": "Paper Products",
@@ -19,30 +23,49 @@ const ITEM_CATEGORIES = {
   "Whiteboard marker x4": "Writing Tools",
   "Glue stick": "Art Supplies",
   "Coloured pencils": "Art Supplies",
-  "Water bottle": "Miscellaneous"
-};
+  "Water bottle": "Miscellaneous",
+});
 
 /**
- * Groups stationery items into categories based on the ITEM_CATEGORIES map.
+ * Escapes HTML special characters in a string to prevent injection.
+ * @param {string} unsafe - The unsafe string.
+ * @returns {string} - The escaped string.
+ */
+function escapeHtml(unsafe) {
+  return unsafe.replace(/[&<>"']/g, (match) => {
+    const escapeMap = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;",
+    };
+    return escapeMap[match];
+  });
+}
+
+/**
+ * Categorizes stationery items by their category and counts quantities.
  *
- * @param {string[]} selectedSubjects - Subjects selected by the user.
- * @param {Object} stationeryData - Full stationery list mapped by subject.
- * @returns {Object} - Categorized items with quantities.
+ * @param {string[]} selectedSubjects - Array of selected subject names.
+ * @param {Record<string, string[]>} stationeryData - Map of subject to item arrays.
+ * @returns {Record<string, Record<string, number>>} - Categorized items with counts.
  */
 export function categorizeStationery(selectedSubjects, stationeryData) {
+  /** @type {Record<string, Record<string, number>>} */
   const categorizedItems = {};
 
   for (const subject of selectedSubjects) {
-    const items = stationeryData[subject] || [];
+    const items = stationeryData[subject] ?? [];
 
     for (const item of items) {
-      const category = ITEM_CATEGORIES[item] || "Uncategorized";
+      const category = ITEM_CATEGORIES[item] ?? "Uncategorized";
 
       if (!categorizedItems[category]) {
         categorizedItems[category] = {};
       }
 
-      categorizedItems[category][item] = (categorizedItems[category][item] || 0) + 1;
+      categorizedItems[category][item] = (categorizedItems[category][item] ?? 0) + 1;
     }
   }
 
@@ -50,27 +73,28 @@ export function categorizeStationery(selectedSubjects, stationeryData) {
 }
 
 /**
- * Builds both HTML and plain text representations of categorized stationery.
+ * Builds HTML and plain text outputs for categorized stationery items.
  *
- * @param {Object} categorizedItems - Items grouped by category and counted.
- * @returns {{ html: string, text: string }} - HTML and plain text output.
+ * @param {Record<string, Record<string, number>>} categorizedItems - Categorized items with counts.
+ * @returns {{ html: string, text: string }} - HTML and plain text representations.
  */
 export function buildCategorizedListOutput(categorizedItems) {
   let html = "";
   let text = "";
 
   for (const [category, items] of Object.entries(categorizedItems)) {
-    html += `<h3>${category}</h3><ul>`;
+    const escapedCategory = escapeHtml(category);
+    html += `<h3>${escapedCategory}</h3><ul>`;
     text += `${category}:\n`;
 
     for (const [item, count] of Object.entries(items)) {
       const itemText = count > 1 ? `${item} x${count}` : item;
-      html += `<li>${itemText}</li>`;
+      html += `<li>${escapeHtml(itemText)}</li>`;
       text += `- ${itemText}\n`;
     }
 
-    html += `</ul>`;
-    text += `\n`;
+    html += "</ul>";
+    text += "\n";
   }
 
   return { html, text };
