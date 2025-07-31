@@ -9,7 +9,7 @@
 ## Branches
 - [`main`](https://github.com/OWelton-Rosie/stationery/tree/main) - contains the latest, stable release.
 - [`tests`](https://github.com/OWelton-Rosie/stationery/tree/tests) - all PRs and commits should first be made here.
-- [`best-practice-mgration`]](https://github.com/OWelton-Rosie/stationery/tree/DEPRECATED%5D-best-practice-migration) - was used when I was refactoring the CSS and JS to follow best practices. No longer updated.
+- [`best-practice-mgration`](https://github.com/OWelton-Rosie/stationery/tree/DEPRECATED%5D-best-practice-migration) - was used when I was refactoring the CSS and JS to follow best practices. No longer updated.
 
 
 # Todo
