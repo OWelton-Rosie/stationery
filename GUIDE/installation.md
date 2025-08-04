@@ -2,15 +2,17 @@
 There are two ways to run the project - creating the server with Python, or, for VSCode users, using the [Live Server extension.](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) 
 
 ## Option 1 - create the server with Python
-First, clone the project
+First, clone the project:
 ```
 git clone https://github.com/OWelton-Rosie/stationery/
 ```
 
-Secondly, navigate to the project
+Secondly, navigate to the project:
 ```
 cd stationery
 ```
+
+Finally, create the server:
 
 If you're using Python 3: 
 ```
@@ -26,7 +28,7 @@ This will open index.html on [http://localhost:8000/src](http://localhost:8000/s
 
 
 ## Option 2 - use Live Server (VSCode only)
-First, clone the project
+First, clone the project:
 ```
 git clone https://github.com/OWelton-Rosie/stationery/
 ```
