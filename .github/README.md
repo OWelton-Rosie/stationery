@@ -9,4 +9,4 @@
 
 # Todo
 - ~~Have the categorisation text be inside the grey stationery list background~~
-- Make copied to clipboard message nicer
+- ~~Make copied to clipboard message nicer~~
