@@ -5,6 +5,7 @@
 ## Directory breakdown
 - `.github`  contains GitHub-specific files such as `CODEOWNERS`, `ISSUE_TEMPLATE`, `README.md`, and various policies (security, code of conduct, etc)
 - `src` contains the actual code
+- `GUIDE` is a WIP but will contain documentation on installing and running the program
 
 
 # Todo
