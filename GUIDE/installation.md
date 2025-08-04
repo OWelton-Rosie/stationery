@@ -1,5 +1,5 @@
 # Installation
-There are two ways to run the project - creating the server with Python, or, for VSCode users, using the Live Server extension. 
+There are two ways to run the project - creating the server with Python, or, for VSCode users, using the [Live Server extension.](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) 
 
 ## Option 1 - create the server with Python
 First, clone the project
