@@ -17,6 +17,6 @@ If you're using a later version:
 python -m http.server
 ```
 
-Regardless of what distribution of Python you're using, you can bring the project down by executing Ctrl+C in the terminal shell. 
+Regardless of what distribution of Python you're using, you can bring the project down by using the keyboard shortcut Ctrl+C in the terminal window. 
 
 
