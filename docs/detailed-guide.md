@@ -30,3 +30,5 @@ python -m http.server
 
 Finally, navigate to [http://localhost:8000/src](localhost:8000/src). 
 
+To bring the server down, use the keyboard shortcut Ctrl+C anywhere in the terminal window. 
+
