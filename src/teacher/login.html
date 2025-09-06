@@ -17,31 +17,9 @@
 
   <p id="login-status"></p>
 
-  <script>
-    // Demo accounts
-    const teachers = {
-      "jdoe": { password: "jdoe", subjects: ["Maths"], fullName: "John Doe" },
-      "msmith": { password: "eng456", subjects: ["English", "History"], fullName: "Mary Smith" }
-    };
-  
-    const form = document.getElementById("teacher-login");
-  
-    form.addEventListener("submit", e => {
-      e.preventDefault();
-      const user = document.getElementById("username").value;
-      const pass = document.getElementById("password").value;
-  
-      if (teachers[user] && teachers[user].password === pass) {
-        // Save allowed subjects AND full name to localStorage
-        localStorage.setItem("teacherSubjects", JSON.stringify(teachers[user].subjects));
-        localStorage.setItem("username", teachers[user].fullName); // store full name
-        window.location.href = "edit.html";
-      } else {
-        document.getElementById("login-status").textContent = "Invalid username or password";
-      }
-    });
+  <script type="module">
+    import { handleLogin } from "./login.js";
+    handleLogin("teacher-login", "login-status", "edit.html");
   </script>
-  
-  
 </body>
 </html>
