@@ -1,0 +1,22 @@
+.stationery-box {
+    border: 1px solid #d1d5db; /* light gray border */
+    border-radius: 4px;
+    padding: 0.5rem 0.75rem;
+    min-height: 200px;
+    max-height: 400px;
+    overflow-y: auto; /* scroll if content exceeds height */
+    font-family: inherit;
+    font-size: 1rem;
+    background-color: #ffffff;
+    white-space: normal; /* allows line breaks in bullets */
+  }
+  
+  .stationery-box ul {
+    margin: 0.25rem 0 0.5rem 1.5rem;
+  }
+  
+  .stationery-box strong {
+    display: block;
+    margin-top: 0.5rem;
+  }
+  
