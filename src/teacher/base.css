@@ -1,0 +1,113 @@
+/* ======= Base Styles ======= */
+body {
+    font-family: sans-serif;
+    padding: 2rem;
+    max-width: 800px;
+    margin: auto;
+    background-color: #fff;
+    color: #333;
+  }
+  
+  /* ======= Headings ======= */
+  h1, h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #222;
+  }
+  
+  /* ======= Form Elements ======= */
+  input[type="text"],
+  input[type="password"],
+  select,
+  textarea,
+  button {
+    font-size: 1rem;
+    padding: 0.6rem 0.75rem;
+    margin: 0.5rem 0 1rem 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+  }
+  
+  textarea {
+    width: 100%;
+    min-height: 120px;
+    resize: vertical;
+    font-family: sans-serif;
+    background-color: #fdfdfd;
+  }
+  
+  /* Keep select consistent with student side */
+  select {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    appearance: none;
+    background-color: #fff;
+  }
+  
+  /* ======= Buttons ======= */
+  button {
+    background-color: #007acc;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  
+  button:hover {
+    background-color: #025185;
+  }
+  
+  #save-stationery {
+    padding: 0.7rem 1.4rem;
+  }
+  
+  form button {
+    padding: 0.6rem 1.2rem;
+  }
+  
+  /* ======= Status Messages ======= */
+  #login-status,
+  #save-status {
+    font-weight: bold;
+    margin-top: 0.5rem;
+    text-align: center;
+  }
+  
+  #login-status.error,
+  #save-status.error {
+    color: #c62828;
+  }
+  
+  #login-status.success,
+  #save-status.success {
+    color: #2e7d32;
+  }
+  
+  /* ======= Containers ======= */
+  .container {
+    background-color: #fafafa;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  }
+  
+  label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+  
+  /* ======= Links ======= */
+  a, a:visited {
+    color: #007acc;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+    color: #025185;
+  }
+  

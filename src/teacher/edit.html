@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Stationery - WHS</title>
+  <link rel="stylesheet" href="./teacher.css">
+</head>
+<body>
+  <h1>Stationery Requirements Editor</h1>
+  <p>Logged in as Teacher</p>
+
+  <label for="edit-year">Select year:</label>
+  <select id="edit-year">
+    <option value="9">Year 9</option>
+    <option value="10">Year 10</option>
+    <option value="11">Year 11</option>
+    <option value="12">Year 12</option>
+    <option value="13">Year 13</option>
+  </select>
+
+  <br><br>
+
+  <label for="stationery-input">Stationery requirements (JSON):</label>
+  <textarea id="stationery-input" rows="25" cols="70"></textarea>
+
+  <br>
+  <button id="save-stationery">Save Changes</button>
+  <p id="save-status"></p>
+
+  <!-- Hidden Formspree form -->
+  <form id="formspree-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" style="display:none;">
+    <input type="hidden" name="subject" id="formspree-subject" value="">
+    <input type="hidden" name="year" id="formspree-year" value="">
+    <textarea name="stationery" id="formspree-stationery"></textarea>
+  </form>
+
+  <script src="./index.js"></script>
+</body>
+</html>
