@@ -1,34 +1,37 @@
 # Detailed installation guide
-
-## Install the dependencies
-We are going to use Python to build a server to run the project locally.
-
-Download and install [Python](https://www.python.org/downloads/).
+## Prerequisites
+- You need to have Git installed to clone the repository. You can install Git [here](https://git-scm.com/downloads).
+- You need to have Docker Desktop installed. You can install Docker Desktop [here](https://www.docker.com/products/docker-desktop/).
+- Given that this app only uses static files, you do not need to have Docker Compose installed.
 
 ## Get the project set up
-Firstly, clone the project:
 ```
 git clone https://github.com/OWelton-Rosie/stationery
 ```
 
-Secondly, navigate to it:
+Navigate to the project:
 ```
 cd stationery
 ```
 
-## Build the server
-If you're using Python 3:
-
+## Build the Docker image
+Use the provided Dockerfile to build the image:
 ```
-python3 -m http.server
-```
-
-If you're using another version of Python:
-```
-python -m http.server
+docker build -t whs-stationery-app .
 ```
 
-Finally, navigate to [http://localhost:8000/src](localhost:8000/src). 
+## Run the server
+Start a container from the image:
+```
+docker run -p 8080:80 whs-stationery-app
+```
 
-To bring the server down, use the keyboard shortcut Ctrl+C anywhere in the terminal window. 
+## Open the app
+In your browser, navigate to [http:localhost:8080](http:localhost:8080).
 
+## Stopping the server
+To stop the container, press Ctrl+C in the terminal window, or stop it manually:
+```
+docker ps          # shows running containers
+docker stop <id>   # replace <id> with container ID
+```

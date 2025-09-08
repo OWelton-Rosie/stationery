@@ -30,9 +30,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // Create a “logged in as” element
   const loggedInEl = document.createElement("p");
   loggedInEl.id = "logged-in-user";
-  loggedInEl.style.fontStyle = "italic";
-  loggedInEl.style.color = "#4b5563";
-  loggedInEl.style.marginTop = "0.25rem";
+  loggedInEl.style.fontStyle = "inherit";
+  loggedInEl.style.color = "black";
+  loggedInEl.style.marginTop = "2.5rem";
   loggedInEl.style.marginBottom = "1rem";
   loggedInEl.textContent = `Logged in as ${username}`;
 

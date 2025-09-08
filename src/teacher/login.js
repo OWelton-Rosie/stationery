@@ -14,7 +14,7 @@ export function handleLogin(formId, statusId, redirectUrl) {
       localStorage.setItem("username", teachers[user].fullName);
       window.location.href = redirectUrl;
     } else {
-      status.textContent = "Invalid username or password";
+      status.textContent = "Invalid username or password. If you think this is an error, please contact the WHS fishbowl.";
     }
   });
 }

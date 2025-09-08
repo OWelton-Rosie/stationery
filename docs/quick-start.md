@@ -1,22 +1,28 @@
 This guide assumes that you are an experienced developer. Refer to the detailed installation guide if you need more information.  
 
 # Get the project set up
-- Clone and navigate to the project
-- Install [Python](https://www.python.org/downloads/) for your Operating System.
+Clone and navigate to the project using Git:
 
-# Run it locally
-To bring the project up on [http://localhost:8000/src](localhost:8000/src), we will use Python to create a server.
-
-Execute the following command: 
 ```
-python3 -m http.server
+git clone https://github.com/OWelton-Rosie/stationery && cd stationery
 ```
 
-If you're using a later version:
+## Run it locally
+To bring the project up on http://localhost:8080, we will use Docker to run the server.
+
+Build the image:
 ```
-python -m http.server
+docker build -t whs-stationery-app .
 ```
 
-Regardless of what distribution of Python you're using, you can bring the project down by using the keyboard shortcut Ctrl+C in the terminal window. 
+Run the container:
+```
+docker run -p 8080:80 whs-stationery-app
+```
 
-
+To stop the server, press Ctrl+C in the terminal window where the container is running,
+or list and stop containers with:
+```
+docker ps
+docker stop container_id
+```
