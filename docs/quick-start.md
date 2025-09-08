@@ -1,4 +1,4 @@
-This guide assumes that you are an experienced developer. Refer to the detailed installation guide if you need more information.  
+This guide assumes that you are an experienced developer. Refer to the [detailed installation guide](https://github.com/OWelton-Rosie/stationery/blob/main/docs/detailed-guide.md) if you need more information.  
 
 # Get the project set up
 Clone and navigate to the project using Git:
