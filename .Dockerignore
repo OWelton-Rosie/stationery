@@ -21,5 +21,6 @@ Thumbs.db
 
 # Ignore docs or notes not needed inside container
 docs/
-README.md
+.github/
 LICENSE
+todo
