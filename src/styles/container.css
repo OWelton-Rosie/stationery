@@ -1,0 +1,32 @@
+/* ======= Layout & Containers ======= */
+.subject-checkbox {
+    margin: 0.5rem 0;
+  }
+  .subject-checkbox input[type="checkbox"] {
+    margin-right: 0.5rem; /* spacing between checkbox and label */
+  }
+  
+  ul {
+    background: #f4f4f4;
+    padding: 1rem;
+    border-radius: 6px;
+  }
+  
+  .stationery-list-container {
+    background-color: #f4f4f4; /* consistent with ul */
+    padding: 1.25rem;
+    border-radius: 6px;
+    margin-top: 1rem;
+  }
+  
+  /* Reduce space below category headers */
+  .stationery-list-container h3 {
+    margin-bottom: 0.1rem; /* smaller gap than default */
+  }
+  
+  /* Optionally, reduce top margin of the ul to bring list closer to header */
+  .stationery-list-container ul {
+    margin-top: 0.1rem; /* reduce gap */
+    /* keep existing padding */
+    padding-left: 1rem; /* keep some indent */
+  }

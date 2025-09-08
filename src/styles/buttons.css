@@ -1,0 +1,28 @@
+#copy-btn {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    background: #007acc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  #copy-btn:hover {
+    background: #005da3;
+  }
+  
+  #generate {
+    background-color: #007acc;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    margin-top: 1rem;
+  }
+  #generate:hover {
+    background-color: #025185;
+  }
