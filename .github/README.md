@@ -7,7 +7,3 @@
 - `src` contains the actual code
 - `docs` is a WIP but will contain documentation on installing and running the program
 
-
-# Todo
-- ~~Have the categorisation text be inside the grey stationery list background~~
-- ~~Make copied to clipboard message nicer~~
