@@ -48,7 +48,6 @@ a:visited:hover {
 .license-summary {
   margin-top: 1rem;
   padding: 1rem;
-  border: 1px solid #ccc;
   border-radius: 6px;
-  background-color: #f9f9f9;
+  background-color: #ffff;
 }
