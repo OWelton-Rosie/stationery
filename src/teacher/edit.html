@@ -7,45 +7,71 @@
   <link rel="stylesheet" href="./styles/base.css">
   <link rel="stylesheet" href="./styles/stationeryBox.css">
   <link rel="icon" type="image/x-icon" href="https://stationery.oweltonrosie.com/assets/WHS_logo.png">
+
+  <style>
+    /* Hide all content by default */
+    #app-content {
+      display: none;
+    }
+
+    /* JS warning styles */
+    #js-warning {
+      padding: 2rem;
+      font-size: 1.2rem;
+    }
+  </style>
 </head>
 <body>
-  <h1>Stationery Requirements Editor</h1>
-
-  <div id="user-info">
-    <p id="logged-in-user"></p>
+  <!-- JS warning -->
+  <div id="js-warning">
+    You need to enable JavaScript to run this app. 
+    <a href="https://www.browserstack.com/guide/how-to-enable-javascript-in-browser" target="_blank" rel="noopener noreferrer">How?</a>
   </div>
-  
-  
 
+  <!-- All page content wrapped in #app-content -->
+  <div id="app-content">
+    <h1>Stationery Requirements Editor</h1>
 
-  <label for="edit-year">Select year:</label>
-  <select id="edit-year">
-    <option value="9">Year 9</option>
-    <option value="10">Year 10</option>
-    <option value="11">Year 11</option>
-    <option value="12">Year 12</option>
-    <option value="13">Year 13</option>
-  </select>
+    <div id="user-info">
+      <p id="logged-in-user"></p>
+    </div>
 
-  <br><br>
+    <label for="edit-year">Select year:</label>
+    <select id="edit-year">
+      <option value="9">Year 9</option>
+      <option value="10">Year 10</option>
+      <option value="11">Year 11</option>
+      <option value="12">Year 12</option>
+      <option value="13">Year 13</option>
+    </select>
 
-  <label for="stationery-input">Stationery requirements:</label>
-  <div id="stationery-input" class="stationery-box" contenteditable="true"></div>
+    <br><br>
 
-  <br>
-  <button id="save-stationery">Save Changes</button>
-  <p id="save-status"></p>
+    <label for="stationery-input">Stationery requirements:</label>
+    <div id="stationery-input" class="stationery-box" contenteditable="true"></div>
 
-  <button id="logout-btn">Logout</button>
+    <br>
+    <button id="save-stationery">Save Changes</button>
+    <p id="save-status"></p>
 
+    <button id="logout-btn">Logout</button>
 
-  <!-- Hidden Formspree form -->
-  <form id="formspree-form" action="https://formspree.io/f/mvgbvedd" method="POST" style="display:none;">
-    <input type="hidden" name="subject" id="formspree-subject" value="">
-    <input type="hidden" name="year" id="formspree-year" value="">
-    <textarea name="stationery" id="formspree-stationery"></textarea>
-  </form>
+    <!-- Hidden Formspree form -->
+    <form id="formspree-form" action="https://formspree.io/f/mvgbvedd" method="POST" style="display:none;">
+      <input type="hidden" name="subject" id="formspree-subject" value="">
+      <input type="hidden" name="year" id="formspree-year" value="">
+      <textarea name="stationery" id="formspree-stationery"></textarea>
+    </form>
+  </div>
 
-  <script src="./scripts/main.js"></script>
+  <script type="module">
+    // Show app content and hide warning since JS is running
+    const warningEl = document.getElementById("js-warning");
+    const appContent = document.getElementById("app-content");
+    if (warningEl) warningEl.style.display = "none";
+    if (appContent) appContent.style.display = "block";
+
+    import "./scripts/main.js";
+  </script>
 </body>
 </html>
