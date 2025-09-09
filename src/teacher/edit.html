@@ -28,14 +28,13 @@
     <a href="https://www.browserstack.com/guide/how-to-enable-javascript-in-browser" target="_blank" rel="noopener noreferrer">How?</a>
   </div>
 
-  <!-- All page content wrapped in #app-content -->
   <div id="app-content">
     <h1>Stationery Requirements Editor</h1>
-
+  
     <div id="user-info">
       <p id="logged-in-user"></p>
     </div>
-
+  
     <label for="edit-year">Select year:</label>
     <select id="edit-year">
       <option value="9">Year 9</option>
@@ -44,18 +43,23 @@
       <option value="12">Year 12</option>
       <option value="13">Year 13</option>
     </select>
-
+  
     <br><br>
-
+  
+    <!-- Stationery requirements first -->
     <label for="stationery-input">Stationery requirements:</label>
     <div id="stationery-input" class="stationery-box" contenteditable="true"></div>
-
+  
     <br>
-    <button id="save-stationery">Save Changes</button>
+  
+    <!-- Status message next -->
     <p id="save-status"></p>
-
+  
+    <!-- Save + logout buttons last -->
+    <button id="save-stationery">Save Changes</button>
+    <br><br>
     <button id="logout-btn">Logout</button>
-
+  
     <!-- Hidden Formspree form -->
     <form id="formspree-form" action="https://formspree.io/f/mvgbvedd" method="POST" style="display:none;">
       <input type="hidden" name="subject" id="formspree-subject" value="">
@@ -63,6 +67,7 @@
       <textarea name="stationery" id="formspree-stationery"></textarea>
     </form>
   </div>
+  
 
   <script type="module">
     // Show app content and hide warning since JS is running
