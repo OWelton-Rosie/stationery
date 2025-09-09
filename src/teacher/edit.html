@@ -4,13 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Edit Stationery</title>
-  <link rel="stylesheet" href="./base.css">
-  <link rel="stylesheet" href="./stationeryBox.css">
+  <link rel="stylesheet" href="./styles/base.css">
+  <link rel="stylesheet" href="./styles/stationeryBox.css">
   <link rel="icon" type="image/x-icon" href="https://stationery.oweltonrosie.com/assets/WHS_logo.png">
-
 </head>
 <body>
   <h1>Stationery Requirements Editor</h1>
+
+  <div id="user-info">
+    <p id="logged-in-user"></p>
+  </div>
+  
+  
+
+
   <label for="edit-year">Select year:</label>
   <select id="edit-year">
     <option value="9">Year 9</option>
@@ -22,12 +29,15 @@
 
   <br><br>
 
-  <label for="stationery-input">Stationery requirements (JSON):</label>
+  <label for="stationery-input">Stationery requirements:</label>
   <div id="stationery-input" class="stationery-box" contenteditable="true"></div>
 
   <br>
   <button id="save-stationery">Save Changes</button>
   <p id="save-status"></p>
+
+  <button id="logout-btn">Logout</button>
+
 
   <!-- Hidden Formspree form -->
   <form id="formspree-form" action="https://formspree.io/f/mvgbvedd" method="POST" style="display:none;">
@@ -36,8 +46,6 @@
     <textarea name="stationery" id="formspree-stationery"></textarea>
   </form>
 
-  logout button here
-
-  <script src="./index.js"></script>
+  <script src="./scripts/main.js"></script>
 </body>
 </html>

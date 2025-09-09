@@ -1,7 +1,6 @@
 # App todo list
 ## Code
-- logout button
-- cleaned up edit logic
+- Nothing here, I am amazing!
 
 ## Documentation
 - more docs
