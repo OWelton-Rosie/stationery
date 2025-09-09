@@ -66,7 +66,7 @@ function clearSubjectsAndResult() {
 }
 
 /**
- * Enforces selection rules for subjects based on year and mandatory count.
+ * Enforces selection rules and live error messages for all years.
  * @param {string} year
  * @param {number} mandatoryCount
  */
@@ -77,34 +77,40 @@ function enforceSelectionRules(year, mandatoryCount) {
     if (checkbox.disabled) return;
 
     checkbox.addEventListener("change", () => {
-      resultDiv.innerHTML = "";
-
       const selected = [...checkboxes].filter(cb => cb.checked && !cb.disabled);
-      const selectedSubjects = selected.map(cb => cb.value);
-      const selectedLanguages = selectedSubjects.filter(subject => FOREIGN_LANGUAGES.has(subject));
-      const electiveCount = selectedSubjects.length;
+      const electiveSubjects = selected.map(cb => cb.value);
+      const selectedLanguages = electiveSubjects.filter(sub => FOREIGN_LANGUAGES.has(sub));
+      const electiveCount = electiveSubjects.length;
 
+      // Year 10 live warning (do not uncheck)
       if (year === "10") {
-        const valid =
-          (selectedLanguages.length === 1 && electiveCount === 3) ||
-          (selectedLanguages.length === 0 && electiveCount === 4);
-
-        if (!valid || selectedLanguages.length > 1) {
-          checkbox.checked = false;
+        if (
+          (selectedLanguages.length === 1 && electiveCount > 2) ||
+          (selectedLanguages.length === 0 && electiveCount > 4) ||
+          selectedLanguages.length > 1
+        ) {
           displayError(ERRORS.tooManySubjectsYr10);
+        } else {
+          resultDiv.innerHTML = ""; // clear error if valid
         }
-      } else {
-        if (selectedLanguages.length > 1) {
-          checkbox.checked = false;
-          displayError(ERRORS.tooManyLanguages);
-          return;
-        }
-
-        if (electiveCount > (9 - mandatoryCount)) {
-          checkbox.checked = false;
-          displayError(ERRORS.tooManySubjects);
-        }
+        return;
       }
+
+      // Other years: live enforcement
+      if (selectedLanguages.length > 1) {
+        checkbox.checked = false;
+        displayError(ERRORS.tooManyLanguages);
+        return;
+      }
+
+      if (electiveCount > (9 - mandatoryCount)) {
+        checkbox.checked = false;
+        displayError(ERRORS.tooManySubjects);
+        return;
+      }
+
+      // Clear error if selection is valid
+      resultDiv.innerHTML = "";
     });
   });
 }
@@ -156,7 +162,6 @@ function handleYearChange() {
 function renderResultList(html, text) {
   resultDiv.innerHTML = "";
 
-  // Stationery list container (with grey background styling presumably)
   const container = document.createElement("div");
   container.className = "stationery-list-container";
 
@@ -168,7 +173,6 @@ function renderResultList(html, text) {
 
   container.append(heading, content);
 
-  // Copy button and status outside the container
   const copyWrapper = document.createElement("div");
   copyWrapper.style.display = "flex";
   copyWrapper.style.alignItems = "center";
@@ -197,8 +201,6 @@ function renderResultList(html, text) {
   });
 
   copyWrapper.append(copyBtn, status);
-
-  // Append both as siblings
   resultDiv.append(container, copyWrapper);
 }
 
@@ -207,22 +209,22 @@ function renderResultList(html, text) {
  */
 function handleGenerateClick() {
   const year = yearSelect.value;
-  const selected = [...document.querySelectorAll('input[name="subject"]:checked')];
-  const selectedSubjects = selected.map(cb => cb.value);
-
-  const selectedLanguages = selectedSubjects.filter(subject => FOREIGN_LANGUAGES.has(subject));
-  const mandatoryCount = document.querySelectorAll('input[name="subject"][disabled]').length;
-  const electiveCount = selectedSubjects.length - mandatoryCount;
+  const checkboxes = document.querySelectorAll('input[name="subject"]:checked');
+  const selectedSubjects = [...checkboxes].map(cb => cb.value);
 
   if (selectedSubjects.length === 0) {
     displayError(ERRORS.noSubjects);
     return;
   }
 
+  const mandatorySubjects = [...document.querySelectorAll('input[name="subject"][disabled]')].map(cb => cb.value);
+  const electiveSubjects = selectedSubjects.filter(subject => !mandatorySubjects.includes(subject));
+  const selectedLanguages = electiveSubjects.filter(subject => FOREIGN_LANGUAGES.has(subject));
+
   if (year === "10") {
     const valid =
-      (selectedLanguages.length === 1 && electiveCount === 3) ||
-      (selectedLanguages.length === 0 && electiveCount === 4);
+      (selectedLanguages.length === 1 && electiveSubjects.length === 2) ||
+      (selectedLanguages.length === 0 && electiveSubjects.length === 4);
 
     if (!valid || selectedLanguages.length > 1) {
       displayError(ERRORS.tooManySubjectsYr10);
@@ -234,7 +236,7 @@ function handleGenerateClick() {
       return;
     }
 
-    if (electiveCount > (9 - mandatoryCount)) {
+    if (electiveSubjects.length > (9 - mandatorySubjects.length)) {
       displayError(ERRORS.tooManySubjects);
       return;
     }
