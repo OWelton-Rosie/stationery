@@ -24,5 +24,5 @@ To stop the server, press Ctrl+C in the terminal window where the container is r
 or list and stop containers with:
 ```
 docker ps
-docker stop container_id
+docker stop container_id 
 ```
