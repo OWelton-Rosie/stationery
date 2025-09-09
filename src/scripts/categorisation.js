@@ -59,7 +59,7 @@ export function categorizeStationery(selectedSubjects, stationeryData) {
     const items = stationeryData[subject] ?? [];
 
     for (const item of items) {
-      const category = ITEM_CATEGORIES[item] ?? "Uncategorized";
+      const category = ITEM_CATEGORIES[item] ?? "Uncategorised";
 
       if (!categorizedItems[category]) {
         categorizedItems[category] = {};
