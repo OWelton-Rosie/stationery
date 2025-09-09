@@ -1,9 +1,10 @@
-<img src="https://github.com/OWelton-Rosie/stationery/blob/main/src/assets/WHS_logo_SMALL.png">
-
 # WHS stationery list generator
 
 ## Directory breakdown
-- `.github`  contains GitHub-specific files such as `CODEOWNERS`, `ISSUE_TEMPLATE`, `README.md`, and various policies (security, code of conduct, etc)
 - `src` contains the actual code
 - `docs` is a WIP but will contain documentation on installing and running the program
+
+
+## Contributing
+Contributions are welcome! Please view the instructions in index.md, which contains a reference of all documentation.
 
