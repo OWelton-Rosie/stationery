@@ -3,12 +3,12 @@
 ## Prerequisites
 - **Git** – needed to clone the repository. Install from [here](https://git-scm.com/downloads).  
 - **Docker Desktop** – needed to run containers. Install from [here](https://www.docker.com/products/docker-desktop/).  
-- **Docker Compose** – usually included with Docker Desktop. If not, install from [here](https://github.com/docker/compose/releases).  
+- **Docker Compose** – usually included with Docker Desktop. If not, install it [here](https://github.com/docker/compose/releases).  
 
 ---
 
 ## Clone the project
-```bash
+```
 git clone https://github.com/OWelton-Rosie/stationery
 cd stationery
 ```
@@ -16,7 +16,7 @@ cd stationery
 ---
 
 ## Start the app with Docker Compose
-The project comes with a `docker-compose.yml` that handles running Nginx and serving your static files. From the project root, run:
+The project comes with a `docker-compose.yml` that handles running Nginx and serving your static files. To build the project, run:
 
 ```
 docker-compose up
