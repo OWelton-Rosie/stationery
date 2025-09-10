@@ -3,7 +3,7 @@ Thank you for considering contributing to this project! Your help is greatly app
 
 ## How to Contribute
 1. Fork the repository.
-2. To run the project, follow the instructions in the [Installation section](https://github.com/OWelton-Rosie/stationery/blob/main/docs/index.md) of the documentation.
+2. To run the project, follow the instructions in the [Installation section](https://github.com/OWelton-Rosie/stationery/blob/main/docs/index.md#installation) of the `docs` directory.
 3. Make your changes, commit them, and push them to your fork.
 4. Open a [Pull Request](https://github.com/OWelton-Rosie/stationery/pulls) against the main repository.  
    - Clearly describe what you've changed.  

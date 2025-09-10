@@ -2,7 +2,7 @@
 This file contains a list of all the documentation, in order of usage.
 
 ## Important 
-- [Contrubuting (read me first!)](https://github.com/OWelton-Rosie/stationery/blob/main/CONTRIBUTING.md)
+- [Contributing (read me first!)](https://github.com/OWelton-Rosie/stationery/blob/main/CONTRIBUTING.md)
 
 ## Installation
 - [Quick start (for experienced developers only)](https://github.com/OWelton-Rosie/stationery/blob/main/docs/quick-start.md)
