@@ -45,8 +45,8 @@ a:visited:hover {
 }
 
 
-.license-summary {
-  margin-top: 1rem;
+.license-summary, .useful-links {
+  margin-top: 0.5rem;
   padding: 1rem;
   border-radius: 6px;
   background-color: #ffff;

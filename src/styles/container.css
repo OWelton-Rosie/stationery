@@ -24,7 +24,7 @@
     margin-bottom: 0.1rem; /* smaller gap than default */
   }
   
-  /* Optionally, reduce top margin of the ul to bring list closer to header */
+  /* reduce top margin of the ul to bring list closer to header */
   .stationery-list-container ul {
     margin-top: 0.1rem; /* reduce gap */
     /* keep existing padding */
