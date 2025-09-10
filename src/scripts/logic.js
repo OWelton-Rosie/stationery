@@ -77,26 +77,47 @@ function enforceSelectionRules(year, mandatoryCount) {
     if (checkbox.disabled) return;
 
     checkbox.addEventListener("change", () => {
-      const selected = [...checkboxes].filter(cb => cb.checked && !cb.disabled);
+      const electiveCheckboxes = [...checkboxes].filter(cb => !cb.disabled);
+      const selected = electiveCheckboxes.filter(cb => cb.checked);
       const electiveSubjects = selected.map(cb => cb.value);
       const selectedLanguages = electiveSubjects.filter(sub => FOREIGN_LANGUAGES.has(sub));
       const electiveCount = electiveSubjects.length;
 
-      // Year 10 live warning (do not uncheck)
+      // ---------------- Year 10 rules ----------------
       if (year === "10") {
-        if (
-          (selectedLanguages.length === 1 && electiveCount > 2) ||
-          (selectedLanguages.length === 0 && electiveCount > 4) ||
-          selectedLanguages.length > 1
-        ) {
+        let maxAllowed;
+
+        if (selectedLanguages.length > 1) {
+          checkbox.checked = false;
+          displayError(ERRORS.tooManyLanguages);
+          return;
+        }
+
+        if (selectedLanguages.length === 1) {
+          maxAllowed = 3; // 1 language + 2 electives
+        } else {
+          maxAllowed = 4; // 4 electives if no language
+        }
+
+        if (electiveCount > maxAllowed) {
+          checkbox.checked = false;
           displayError(ERRORS.tooManySubjectsYr10);
         } else {
-          resultDiv.innerHTML = ""; // clear error if valid
+          resultDiv.innerHTML = "";
         }
+
+        electiveCheckboxes.forEach(cb => {
+          if (!cb.checked) {
+            cb.disabled = electiveCount >= maxAllowed;
+          } else {
+            cb.disabled = false;
+          }
+        });
+
         return;
       }
 
-      // Other years: live enforcement
+      // ---------------- Other years ----------------
       if (selectedLanguages.length > 1) {
         checkbox.checked = false;
         displayError(ERRORS.tooManyLanguages);
@@ -223,7 +244,7 @@ function handleGenerateClick() {
 
   if (year === "10") {
     const valid =
-      (selectedLanguages.length === 1 && electiveSubjects.length === 2) ||
+      (selectedLanguages.length === 1 && electiveSubjects.length === 3) ||
       (selectedLanguages.length === 0 && electiveSubjects.length === 4);
 
     if (!valid || selectedLanguages.length > 1) {

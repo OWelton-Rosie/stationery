@@ -1,5 +1,15 @@
 /**
  * A mapping of school year levels to their required (must-have) subjects.
+ * These subjects are compulsory for each year and will always be pre-selected
+ * and disabled in the subject list.
+ *
+ * Notes:
+ * - Year 10 students still have 5 mandatory subjects, but their electives
+ *   are capped differently:
+ *     • 4 electives total if no foreign language is chosen
+ *     • 2 electives total if exactly 1 foreign language is chosen
+ *     • never more than 1 language
+ *
  * This object is immutable.
  * @readonly
  */
@@ -19,8 +29,13 @@ const MUST_HAVE_SUBJECTS_BY_YEAR = Object.freeze({
     "Social Studies",
     "Health and Physical Education",
   ]),
-  "11": Object.freeze(["English", "Mathematics"]),
-  "12": Object.freeze(["English"]),
+  "11": Object.freeze([
+    "English",
+    "Mathematics",
+  ]),
+  "12": Object.freeze([
+    "English",
+  ]),
   "13": Object.freeze([]),
 });
 
@@ -32,7 +47,9 @@ const MUST_HAVE_SUBJECTS_BY_YEAR = Object.freeze({
  */
 export function getMustHaveSubjects(year) {
   if (typeof year !== "string") {
-    console.warn(`Invalid year type: expected string but received ${typeof year}`);
+    console.warn(
+      `Invalid year type passed to getMustHaveSubjects: expected string but received ${typeof year}`
+    );
     return [];
   }
 

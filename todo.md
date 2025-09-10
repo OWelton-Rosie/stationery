@@ -1,6 +1,6 @@
 # App todo list
 ## Code
-- Nothing here, I am amazing!
+- more JS imports as logic.js is getting a but messy
 
 ## Documentation
 - more docs
