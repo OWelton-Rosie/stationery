@@ -4,25 +4,22 @@ This guide assumes that you are an experienced developer. Refer to the [detailed
 Clone and navigate to the project using Git:
 
 ```
-git clone https://github.com/OWelton-Rosie/stationery && cd stationery
+git clone https://github.com/OWelton-Rosie/stationery &&
+cd stationery
 ```
 
 ## Run it locally
-To bring the project up on http://localhost:8080, we will use Docker to run the server.
+To bring the project up on [http://localhost:8080](http://localhost:8080), use Docker Compose to run the server:
 
-Build the image:
 ```
-docker build -t whs-stationery-app .
-```
-
-Run the container:
-```
-docker run -p 8080:80 whs-stationery-app
+docker-compose up
 ```
 
-To stop the server, press Ctrl+C in the terminal window where the container is running,
-or list and stop containers with:
+This will start Nginx and serve the `src` folder, with live updates when you edit files.
+
+## Stop the server
+Press **Ctrl+C** in the terminal where Docker Compose is running, or stop containers manually:
+
 ```
-docker ps
-docker stop container_id 
+docker-compose down
 ```

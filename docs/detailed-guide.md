@@ -1,37 +1,48 @@
-# Detailed installation guide
+# Detailed Installation Guide
+
 ## Prerequisites
-- You need to have Git installed to clone the repository. You can install Git [here](https://git-scm.com/downloads).
-- You need to have Docker Desktop installed. You can install Docker Desktop [here](https://www.docker.com/products/docker-desktop/).
-- Given that this app only uses static files, you do not need to have Docker Compose installed.
+- **Git** – needed to clone the repository. Install from [here](https://git-scm.com/downloads).  
+- **Docker Desktop** – needed to run containers. Install from [here](https://www.docker.com/products/docker-desktop/).  
+- **Docker Compose** – usually included with Docker Desktop. If not, install from [here](https://github.com/docker/compose/releases).  
 
-## Get the project set up
-```
+---
+
+## Clone the project
+```bash
 git clone https://github.com/OWelton-Rosie/stationery
-```
-
-Navigate to the project:
-```
 cd stationery
 ```
 
-## Build the Docker image
-Use the provided Dockerfile to build the image:
+---
+
+## Start the app with Docker Compose
+The project comes with a `docker-compose.yml` that handles running Nginx and serving your static files. From the project root, run:
+
 ```
-docker build -t whs-stationery-app .
+docker-compose up
 ```
 
-## Run the server
-Start a container from the image:
-```
-docker run -p 8080:80 whs-stationery-app
-```
+This will:
+
+- Pull the Nginx image if needed.  
+- Mount your local `src` folder into the container so changes appear live.  
+- Serve your site on `http://localhost:8080`.  
+
+---
 
 ## Open the app
-In your browser, navigate to [http:localhost:8080](http:localhost:8080).
+In your browser, go to:  
+[http://localhost:8080](http://localhost:8080)
 
-## Stopping the server
-To stop the container, press Ctrl+C in the terminal window, or stop it manually:
+Any changes you make in the `src` folder will appear immediately on refresh.  
+
+---
+
+## Stop the server
+Press **Ctrl+C** in the terminal where Docker Compose is running, or stop manually:
+
 ```
-docker ps          # shows running containers
-docker stop <id>   # replace <id> with container ID
+docker-compose down
 ```
+
+This will stop and remove the container(s) cleanly.
