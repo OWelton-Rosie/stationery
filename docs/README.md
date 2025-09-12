@@ -14,3 +14,6 @@ This file contains a list of all the documentation, in order of usage.
 
 ## Hosting
 - [Hosting your customised app](https://github.com/OWelton-Rosie/stationery/blob/main/docs/hosting.md)
+
+# Other
+- [My vision for the project](https://github.com/OWelton-Rosie/stationery/blob/main/docs/vision.md)
