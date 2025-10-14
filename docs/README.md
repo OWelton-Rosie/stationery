@@ -10,7 +10,7 @@ This file contains a list of all the documentation, in order of usage.
 
 ## Customisation
 - [Understanding the app's stack](https://github.com/OWelton-Rosie/stationery/blob/main/docs/stack.md)
-- [How it works](https://github.com/OWelton-Rosie/stationery/blob/main/docs/how.md)
+- [How it works](https://github.com/OWelton-Rosie/stationery/blob/main/docs/how-it-works.md)
 
 ## Hosting
 - [Hosting your customised app](https://github.com/OWelton-Rosie/stationery/blob/main/docs/hosting.md)

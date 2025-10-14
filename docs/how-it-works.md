@@ -1,4 +1,4 @@
-# How the App Works
+# How the app works
 
 The app helps students generate a stationery list based on their selected subjects. It works in several layers:
 
