@@ -17,3 +17,4 @@ This file contains a list of all the documentation, in order of usage.
 
 # Other
 - [My vision for the project](https://github.com/OWelton-Rosie/stationery/blob/main/docs/vision.md)
+- [Security policy](https://github.com/OWelton-Rosie/stationery/blob/main/SECURITY.md)
