@@ -27,6 +27,15 @@ const ITEM_CATEGORIES = Object.freeze({
 });
 
 /**
+ * Items that should never be accumulated.
+ * They appear at most once, regardless of how many subjects include them.
+ * @readonly
+ */
+const NON_CUMULATIVE_ITEMS = new Set([
+  "Laptop",
+]);
+
+/**
  * Escapes HTML special characters in a string to prevent injection.
  * @param {string} unsafe - The unsafe string.
  * @returns {string} - The escaped string.
@@ -65,7 +74,13 @@ export function categorizeStationery(selectedSubjects, stationeryData) {
         categorizedItems[category] = {};
       }
 
-      categorizedItems[category][item] = (categorizedItems[category][item] ?? 0) + 1;
+      if (NON_CUMULATIVE_ITEMS.has(item)) {
+        // Force non-cumulative items to appear only once
+        categorizedItems[category][item] = 1;
+      } else {
+        categorizedItems[category][item] =
+          (categorizedItems[category][item] ?? 0) + 1;
+      }
     }
   }
 
